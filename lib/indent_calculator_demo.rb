@@ -1,6 +1,7 @@
-require_relative './nesting_parser'
+require_relative 'indent_calculator_demo/version'
+require_relative 'indent_calculator_demo/nesting_parser'
 
-module IndentCalculator
+module IndentCalculatorDemo
   def self.tokenize(code)
     Ripper::Lexer.new(code).scan.chunk(&:pos).map do |_pos, same_pos_tokens|
       same_pos_tokens.find { !_1.event.end_with?('_error') } || same_pos_tokens.first

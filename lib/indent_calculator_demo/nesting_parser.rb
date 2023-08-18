@@ -1,4 +1,4 @@
-module NestingParser
+module IndentCalculatorDemo::NestingParser
   IGNORE_TOKENS = %i[on_sp on_ignored_nl on_comment on_embdoc_beg on_embdoc on_embdoc_end]
 
   # Scan each token and call the given block with array of token and other information for parsing
