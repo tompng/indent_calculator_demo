@@ -1,24 +1,48 @@
 # IndentCalculatorDemo
 
-TODO: Delete this and the text below, and describe your gem
+Forked from old version of tompng/katakata_irb (Nov 1, 2022 https://github.com/tompng/katakata_irb/commit/097b7064caf42d3f3db624984f3b63a1a226a232).
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/indent_calculator_demo`. To experiment with that code, run `bin/console` for an interactive prompt.
+Merged changes made to NestingParser (Jun 16, 2023 https://github.com/tompng/katakata_irb/commit/38289e41ce7fe348a06c07258d43b1901880c30d). KatakataIrb's NestingParser is merged to ruby/irb (https://github.com/ruby/irb/pull/500).
+
+Changed to an indent calculation demo gem. See IRB's implementation for more information.
+
+## Difference from IRB's calculation
+IRB calculates both of these.
+- Next line's indent level
+- Current line re-indented level (cursor position dependant)
+
+This demo gem only calculates next line's indent level.
+The result is not identical to IRB's one and not sufficient to make an IRB clone.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
-Install the gem and add to the application's Gemfile by executing:
-
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+Add this to your Gemfile
+```
+gem '[gem name]', github: '[repo url]'
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+IndentCalculatorDemo.calculate <<RUBY
+def f
+  (1..10).each do
+    puts(
+      _1,
+RUBY
+#=> 3
+
+IndentCalculatorDemo.calculate <<'RUBY'
+if true
+  if true
+    if true
+      <<A
+heredoc
+#{
+  puts(
+RUBY
+#=> 2
+```
 
 ## Development
 
