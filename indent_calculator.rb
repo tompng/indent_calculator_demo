@@ -8,10 +8,9 @@ module IndentCalculator
   end
 
   def self.calculate(code)
-    opens, heredocs = TRex.parse(tokenize(code)) { }
+    opens = TRex.open_tokens tokenize(code)
     indent_level = 0
-    (opens.map(&:first) + heredocs).each do |token|
-      p token
+    opens.each do |token|
       case token.event
       when :on_heredoc_beg
         if token.tok.match?(/\A<<[~-]/)
@@ -23,6 +22,8 @@ module IndentCalculator
         indent_level += 1 if token.tok[0] == '%'
       when :on_embdoc_beg
         indent_level = 0
+      when :on_op
+        # ignore. `a ? b : c` and `do |param|`
       else
         indent_level += 1
       end
