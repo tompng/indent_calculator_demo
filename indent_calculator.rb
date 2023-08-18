@@ -1,4 +1,4 @@
-require_relative './trex'
+require_relative './nesting_parser'
 
 module IndentCalculator
   def self.tokenize(code)
@@ -8,7 +8,7 @@ module IndentCalculator
   end
 
   def self.calculate(code)
-    opens = TRex.open_tokens tokenize(code)
+    opens = NestingParser.open_tokens tokenize(code)
     indent_level = 0
     opens.each do |token|
       case token.event
